@@ -23,7 +23,7 @@
 
 | 阶段0 任务 | 状态 |
 |---|---|
-| 策略生成器 MVP（Python CLI，GitHub 开源） | ⬜ 未开始 |
+| 策略生成器 MVP（Python CLI，GitHub 开源） | ✅ 已完成（待左力验收，数据为占位版） |
 | 数据源精简版（手动整理 20-30 个主流模型 JSON 数据） | ⬜ 未开始 |
 | 首批 L2 交付物（3-5 个可复制配置模板） | ⬜ 未开始 |
 | 运营账号基建（小红书专业号 + B站号） | ⬜ 未开始 |
@@ -46,7 +46,7 @@
 |---|---|---|---|
 | 项目文档体系搭建与迁移 | WorkBuddy（阿腾） | ✅ 完成 | 2026-09-28 |
 | Git 仓库卫生检查（.gitignore 补漏） | WorkBuddy（小简） | ✅ 完成 | 2026-09-28 |
-| 策略生成器 MVP | Trae（开发）+ WorkBuddy/阿腾（PM） | 🟡 进行中 | 2026-09-28 PRD 已交付 |
+| 策略生成器 MVP | Trae（开发）+ WorkBuddy/阿腾（PM） | ✅ 完成（待左力验收） | 2026-09-28 开发交付 |
 
 ## 4. 工作日志（追加式）
 
@@ -99,6 +99,12 @@
   - 待左力确认：docs/05 第 5 节三条决策（不 fork / 不重做 / 原则口径）
   - PM 待办（不阻塞开发）：门1 前核查 which-llm 等同类项目许可证与数据引用条款
   - 改动文件：`docs/05-开源借鉴与架构说明.md`、`AGENTS.md`、`STATUS.md`（本条目）
+- **2026-09-28 [Trae]** 按 PRD 实施顺序完成 model-picker MVP 开发（占位数据版，待左力验收）：
+  - 全程走特性分支 `feat/model-picker-mvp`，7 个独立 commit：① 骨架 + `data/models.json` 20 个占位模型（国内 13+国际 7）② F1 四步问答（模型多选含清单外手输/任务多选/偏好单选/确认可回退；q 退出）③ F2 推荐引擎（任务→7 维度权重表 × 偏好 ×1.5 归一化；速度分=每 10 tokens/秒 1 分封顶 10；价格分以用户清单最低混合价为 10 分基准；首选=综合最高，备选=够用线 ≥7.0 以上最便宜；清单无合适模型时从全量清单补建议并标注"需要新开通 API"）④ F4-1 终端报告（东亚字宽对齐）+ P1 成本估算（轻/中/重三档，对比全用最贵模型节省额）⑤ F4-2 `model-picker-config.yaml`（任务别名 + `<task>_backup` 主备 fallback + api_key 走 os.environ，零依赖字符串模板）⑥ README（中文）+ MIT LICENSE ⑦ P1 `my-strategy.md` + preset 场景（5 个预设，`--preset` 预填任务/偏好，仍需确认）
+  - 新增文件：`model_picker/`（`__main__` 入口、`quiz`、`engine`、`data`、`report`、`cost`、`yaml_gen`、`markdown_report`、`presets`）、`data/models.json`、`README.md`、`LICENSE`；`.gitignore` 补 `model-picker-config.yaml` / `my-strategy.md`（运行产物防入库）
+  - 验收自查：`compileall` 通过；主流程/回退修改/非法输入重提示/q 退出/preset/低置信补建议/清单外模型（yaml 注释块引导补全）均通过；产物 yaml 经 PyYAML `safe_load` 校验结构与 fallbacks 合法；写文件用 `newline="\n"`（Windows 兼容）。**未装 litellm 本体，验收标准第 2 条"被 LiteLLM 加载"待左力环境验证**
+  - 代码级决策备忘（未记决策日志，属实现细节）：速度/价格换算口径见 engine.py 注释；占位数据扩展了 PRD 未列的两个字段 `litellm_model`/`api_key_env`（生成配置必需）——**请阿腾整理正式数据时带上**
+  - 下一步建议：① 左力按验收标准走一遍（重点：非程序员视角 10 分钟通关 + litellm 实际加载）；② README 演示 GIF/录屏待补（验收标准第 5 条）；③ 门1 发布前需替换正式数据、确认 GitHub 账号（悬置问题第 1 条）；④ Windows 实机跑一遍（当前仅 LF 静态校验）
 
 ## 5. 决策日志（方向性决策记录）
 
