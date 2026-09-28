@@ -9,6 +9,7 @@ from pathlib import Path
 from . import __version__
 from .data import default_data_path, load_models
 from .engine import build_strategy
+from .markdown_report import MARKDOWN_FILENAME, write_markdown
 from .presets import PRESET_NAMES, format_preset_list
 from .quiz import run_quiz
 from .report import print_costs, print_epilogue, print_strategy
@@ -61,11 +62,14 @@ def main(argv: list[str] | None = None) -> int:
     print_strategy(strategy)
     print_costs(strategy)
     config_path = write_config(strategy, Path.cwd() / CONFIG_FILENAME)
+    md_path = write_markdown(strategy, Path.cwd() / MARKDOWN_FILENAME)
     print_epilogue(
-        [(config_path.name, f"LiteLLM 配置，运行：litellm --config {config_path.name}")],
+        [
+            (config_path.name, f"LiteLLM 配置，运行：litellm --config {config_path.name}"),
+            (md_path.name, "可分享的策略说明（含成本估算表）"),
+        ],
         meta,
     )
-    print("\n（Markdown 策略报告开发中，下一步接入……）")
     return 0
 
 
