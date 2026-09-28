@@ -14,7 +14,7 @@
 | [WorkBuddy/阿腾] | WorkBuddy 国内版 | `.workbuddy/` | 2026-09-28 | 项目文档体系搭建者 |
 | [WorkBuddy/小简] | WorkBuddy 海外版（workbuddy-ai） | `.workbuddy-ai/` | 2026-09-28 | 修复过 .gitignore 漏项（6c9a285） |
 | [QwenWork] | QwenWork（千问办公） | `.qwenwork/`（本次已补 .gitignore 忽略，自查通过） | 2026-09-28 | 开工登记 + 仓库卫生自查 |
-| （待登记） | Trae | `.trae/`（以自查为准） | — | — |
+| [Trae] | Trae（桌面版） | 项目内 `.trae/`（`.trae/*` 已忽略、`rules/` 例外入库，自查通过）；私有记忆在项目外 `~/.trae-cn/memory/` | 2026-09-28 | 开工登记 + 仓库状态自查 |
 | [Qoder] | Qoder（桌面版） | `.qoder/`（已在 .gitignore 第 28 行，自查通过） | 2026-09-28 | 推动确立"特性分支 → 合回 main"的 Git 约定 |
 
 ## 1. 当前阶段
@@ -75,6 +75,13 @@
   - 改动文件：`AGENTS.md`（6.8 节）、`STATUS.md`（本文件）
   - 任务看板：未新增认领。「策略生成器 MVP」仍无人认领，且其前置技术方案属方向性决策，QwenWork 已记录左力决定"本轮先不启动"，本轮同样不擅自开工
   - 下一步建议：待左力发话后，先出 MVP 技术方案草案（CLI 交互形态 / 数据源选型 / 配置输出格式）供拍板，再进入开发；开发按新分支约定走
+- **2026-09-28 [Trae]** 完成开工四步检查，暂未认领开发任务：
+  - 读完 `AGENTS.md` + `STATUS.md` 全文，确认 main 分支、工作区干净、共 8 次提交
+  - 参与者登记：填入 `[Trae]` 一行（原为"待登记"占位）
+  - 工作目录自查：`git check-ignore -v .trae/x` 命中 `.gitignore:26:.trae/*`，`.trae/rules/` 例外正常保留；本智能体私有记忆位于项目外 `~/.trae-cn/memory/`，无需新增忽略规则
+  - 任务看板：未认领。「策略生成器 MVP」前置技术方案未定，且 QwenWork 已记录左力决定"本轮先不启动 MVP"，遵照执行、不擅自开工
+  - 改动文件：`STATUS.md`（本文件）；全程走 `feat/trae-onboarding` 特性分支
+  - 下一步建议：同 Qoder——待左力发话启动 MVP 时，先出技术方案草案（CLI 交互形态 / 数据源选型 / 配置输出格式）供拍板
 
 ## 5. 决策日志（方向性决策记录）
 
