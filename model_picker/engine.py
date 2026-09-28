@@ -235,10 +235,10 @@ def _make_recommendation(
             return (bp is None, bp if bp is not None else 0.0)
 
         backup_score, backup = min(adequate, key=_price_key)
-        backup_note = f"够用线（≥{ADEQUATE_SCORE}）以上、你清单里价格最低的选项"
+        backup_note = f"够用线 ≥{ADEQUATE_SCORE} 分以上、你清单里价格最低的选项"
     elif len(scored) > 1:
         backup_score, backup = scored[1]
-        backup_note = f"与首选有差距（够用线 {ADEQUATE_SCORE} 以下），仅供参考"
+        backup_note = f"与首选有差距（够用线 {ADEQUATE_SCORE} 分以下），仅供参考"
 
     return Recommendation(
         task_id=task_id,

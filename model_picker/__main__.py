@@ -10,6 +10,7 @@ from .data import default_data_path, load_models
 from .engine import build_strategy
 from .presets import PRESET_NAMES, format_preset_list
 from .quiz import run_quiz
+from .report import print_costs, print_strategy
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -55,13 +56,9 @@ def main(argv: list[str] | None = None) -> int:
     strategy = build_strategy(
         answers.models, answers.task_ids, answers.priority, catalog, meta
     )
-    # 开发中占位：推荐引擎接入后的简单回显，完整终端报告在后续提交补齐
-    print("\n【推荐结果】")
-    for rec in strategy.recommendations:
-        print(f"  · {rec.task_name}：首选 {rec.primary.label()}（{rec.primary_score:.2f} 分）")
-        for r in rec.reasons:
-            print(f"      {r}")
-    print("\n（终端报告与配置生成开发中，下一步接入……）")
+    print_strategy(strategy)
+    print_costs(strategy)
+    print("\n（LiteLLM 配置与 Markdown 报告生成开发中，下一步接入……）")
     return 0
 
 
