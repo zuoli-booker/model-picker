@@ -1,0 +1,30 @@
+# 系统文件
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# 环境与密钥（BYOK 项目铁律：任何密钥不入库）
+.env
+.env.*
+*.key
+secrets/
+
+# 编辑器/智能体工作目录
+.idea/
+.vscode/
+.workbuddy/
+.claude/
+.trae/
+.qoder/
+
+# 构建产物
+dist/
+build/
+*.log
