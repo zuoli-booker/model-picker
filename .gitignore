@@ -32,3 +32,7 @@ secrets/
 dist/
 build/
 *.log
+
+# model-picker 运行产物（用户在自己目录运行生成的文件，不入库）
+model-picker-config.yaml
+my-strategy.md
