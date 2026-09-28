@@ -4,13 +4,15 @@ from __future__ import annotations
 
 import argparse
 import sys
+from pathlib import Path
 
 from . import __version__
 from .data import default_data_path, load_models
 from .engine import build_strategy
 from .presets import PRESET_NAMES, format_preset_list
 from .quiz import run_quiz
-from .report import print_costs, print_strategy
+from .report import print_costs, print_epilogue, print_strategy
+from .yaml_gen import CONFIG_FILENAME, write_config
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -58,7 +60,12 @@ def main(argv: list[str] | None = None) -> int:
     )
     print_strategy(strategy)
     print_costs(strategy)
-    print("\n（LiteLLM 配置与 Markdown 报告生成开发中，下一步接入……）")
+    config_path = write_config(strategy, Path.cwd() / CONFIG_FILENAME)
+    print_epilogue(
+        [(config_path.name, f"LiteLLM 配置，运行：litellm --config {config_path.name}")],
+        meta,
+    )
+    print("\n（Markdown 策略报告开发中，下一步接入……）")
     return 0
 
 
