@@ -24,6 +24,7 @@ secrets/
 .claude/
 .trae/
 .qoder/
+.qwenwork/
 
 # 构建产物
 dist/
