@@ -13,8 +13,9 @@ from pathlib import Path
 # 五个能力维度（0-10 分）；速度、价格由实测数据换算，不直接打分
 CAPABILITY_DIMS = ("writing", "coding", "long_context", "reasoning", "chinese")
 
-# 清单外模型（用户手动输入）的兜底画像：各维度统一给中性分，并标注"数据缺失"
-FALLBACK_SCORE = 6.5
+# 清单外模型（用户手动输入）的兜底画像：各维度统一给中性偏下分，并标注"数据缺失"。
+# 取 6.0 而非 6.5：低于引擎的 LOW_CONFIDENCE_SCORE(6.5)，让"数据缺失"如实触发补充建议。
+FALLBACK_SCORE = 6.0
 
 # 混合价折算假设：输入:输出 = 3:1（轻开发者典型对话场景）
 INPUT_OUTPUT_RATIO = 3
@@ -56,8 +57,8 @@ class Model:
         return "国内" if self.origin == "cn" else "国际"
 
     def label(self) -> str:
-        """终端 / 报告里的展示标签，如「DeepSeek V4（deepseek-chat）」"""
-        return f"{self.display_name}（{self.id}）"
+        """终端 / 报告里的展示标签，如「DeepSeek V4（deepseek-chat）」；id 与展示名相同时不重复。"""
+        return f"{self.display_name}（{self.id}）" if self.display_name != self.id else self.display_name
 
 
 def default_data_path() -> Path:
@@ -93,10 +94,10 @@ def load_models(path: Path | None = None) -> tuple[list[Model], dict]:
 
 
 def make_unknown_model(name: str) -> Model:
-    """问答中手动输入的清单外模型：数据缺失，按通用策略处理（各维度中性分）。"""
+    """问答中手动输入的清单外模型：数据缺失，按通用策略处理（各维度中性偏下分）。"""
     return Model(
         id=name,
-        display_name=f"{name}（清单外）",
+        display_name=name,
         vendor="未知",
         origin="cn",
         litellm_model=None,

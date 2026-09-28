@@ -7,7 +7,7 @@ import sys
 
 from . import __version__
 from .data import default_data_path, load_models
-from .engine import PRIORITIES, TASKS
+from .engine import build_strategy
 from .presets import PRESET_NAMES, format_preset_list
 from .quiz import run_quiz
 
@@ -52,12 +52,16 @@ def main(argv: list[str] | None = None) -> int:
         print("\n已退出，未生成任何文件。")
         return 0
 
-    # 开发中占位：推荐引擎接入前的答案回显
-    print("\n【你的选择】")
-    print("  手头模型：" + "、".join(m.label() for m in answers.models))
-    print("  主要任务：" + "、".join(TASKS[t]["name"] for t in answers.task_ids))
-    print(f"  优先方向：{PRIORITIES[answers.priority]}")
-    print("\n（推荐引擎开发中，下一步接入……）")
+    strategy = build_strategy(
+        answers.models, answers.task_ids, answers.priority, catalog, meta
+    )
+    # 开发中占位：推荐引擎接入后的简单回显，完整终端报告在后续提交补齐
+    print("\n【推荐结果】")
+    for rec in strategy.recommendations:
+        print(f"  · {rec.task_name}：首选 {rec.primary.label()}（{rec.primary_score:.2f} 分）")
+        for r in rec.reasons:
+            print(f"      {r}")
+    print("\n（终端报告与配置生成开发中，下一步接入……）")
     return 0
 
 
