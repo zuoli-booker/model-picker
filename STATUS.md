@@ -50,6 +50,12 @@
 
 ## 4. 工作日志（追加式）
 
+- **2026-09-29 [WorkBuddy/阿腾]** 仓库推送 GitHub 上线：
+  - 左力确认发布账号为其个人号，已完成：关联 remote（git@github.com:zuoli-booker/model-picker.git）→ `git push -u origin main` → `git ls-remote` 验证远端 main = 本地 HEAD（a2f05e5），推送成功
+  - 说明：首次推送在 9-28 晚被会话中断未生效（远端为空仓库），本次补推完成
+  - 悬置问题关闭 1 项：GitHub 发布账号 → 个人号 `zuoli-booker`
+  - 下一步建议：左力到 GitHub 仓库页确认渲染正常（README/目录结构）；README 演示 GIF 待补；正式模型数据替换占位数据（阿腾负责）；随后可冲门1 首发渠道
+
 - **2026-09-28 [WorkBuddy/阿腾]** 完成项目文档体系搭建：
   - 建立 `AGENTS.md`（协作入口）、`STATUS.md`（本文件）、`docs/01-产品需求.md`、`docs/02-落地方案与路线图.md`、`docs/03-人群与内容运营策略.md`
   - 迁入历史论证文档至 `docs/references/`（可行性评估报告、三方案对比评估、人群运营策略报告 HTML 全文、方案A 调整方案）
@@ -123,6 +129,7 @@
 | 2026-09-28 | Git 改为「特性分支开发 → 本地合并回 main」，废弃原 6.8「只在 main 提交」 | AGENTS.md 原约定与左力既有要求（不许直接在 main 上改）冲突；左力在三选一中选定此方案，理由是兼顾安全与 AGENTS.md「不推远端、不改历史」的原意 | 全智能体：以后开工先 `git checkout -b feat/<描述>`，收工合回 main 并删分支；AGENTS.md 6.8 已同步改写 |
 
 | 2026-09-28 | MVP 交互形态=纯 CLI 交互问答 | 目标用户为非程序员，向导式问答门槛最低；Web 版留阶段2 | model-picker 开发范围 |
+| 2026-09-29 | GitHub 发布账号=个人号 `zuoli-booker`；仓库 `model-picker` 已推送上线（https://github.com/zuoli-booker/model-picker） | 开源工具 star 跟随个人 IP，与小红书/B站引流同一套人设 | 发布、门1 考核、后续推送均以此为远端 |
 | 2026-09-28 | MVP 模型覆盖=国内 13 + 国际 7（共 20），MVP 手动维护 models.json | 贴合国内轻开发者手头 Key；手动数据是阶段2 建管道前的过渡 | 数据整理与策略引擎权重表 |
 | 2026-09-28 | 仓库名/命令名/品牌名=`model-picker` | README、安装命令、品牌统一；定名不宜反复 | 全项目命名 |
 | 2026-09-28 | MVP 阶段开发采用 Trae 开发 + 阿腾 PM 分工 | 用户指定 Trae 写第一部分代码 | 阶段0 执行方式 |
@@ -133,5 +140,4 @@
 
 ## 6. 悬而未决的问题
 
-- GitHub 发布账号（个人号还是项目号）——待定
 - 首批 30 篇选题是否需要单独文档管理——待阶段0 选题规划时定
