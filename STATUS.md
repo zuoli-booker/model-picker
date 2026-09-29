@@ -50,6 +50,13 @@
 
 ## 4. 工作日志（追加式）
 
+- **2026-09-29 [WorkBuddy/阿腾]** 完成 Jev/Laya 决策模型调研 + 1Panel 借鉴分析（docs/06）：
+  - Jev（TypeSafe AI，闭源托管，9-15 发布）与 Laya（Apache-2.0 开源决策模型，9-18 发布，9 天 2.7 万★）同属"System 1"非自回归决策模型品类，可做路由的"任务类型自动识别"决策层
+  - 结论：方向正确、时点未到——Laya 零样本接近随机需微调，列为阶段3"智能决策模式"增强项（sidecar 形态，默认关闭）；建议先用 MVP 积累用户任务选择日志作为未来微调标注数据；Jev 托管版数据出境，不符合 BYOK 立身之本，仅作对标
+  - 1Panel（GPL-3.0）借鉴 8 项：一键安装脚本、README 黄金结构（Why 对比表）、OSS/Pro 分层、策略模板市场（类比应用商店）、安全默认、社区三件套、截图文化、竞争情报（1Panel 已上 AI Gateway）
+  - 待左力确认 2 项：①Laya 集成时点 ②是否授权按 1Panel 结构重构 README（发布前低成本高回报项）
+  - 下一步建议：左力确认后执行 README 重构；正式模型数据整理继续排期
+
 - **2026-09-29 [WorkBuddy/阿腾]** 仓库推送 GitHub 上线：
   - 左力确认发布账号为其个人号，已完成：关联 remote（git@github.com:zuoli-booker/model-picker.git）→ `git push -u origin main` → `git ls-remote` 验证远端 main = 本地 HEAD（a2f05e5），推送成功
   - 说明：首次推送在 9-28 晚被会话中断未生效（远端为空仓库），本次补推完成
